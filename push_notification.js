@@ -45,7 +45,6 @@ const c19BoliviaData = async () => {
 
     const { Country, TotalConfirmed, TotalDeaths, TotalRecovered, NewConfirmed } = boliviaData;
 
-    console.log({ Country, TotalConfirmed, TotalDeaths, TotalRecovered, NewConfirmed })
 
     return {
         pais: Country,

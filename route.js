@@ -16,10 +16,8 @@ router.get('/c19Bolivia', async (req, res) => {
 });
 
 
-var schedule = require('node-schedule');
-
-var j = schedule.scheduleJob('* * /17 * * *', async() => {
-    await console.log(c19BoliviaData());
+const schedule_xd = schedule.scheduleJob('* * /17 * * *', async () => {
+    await c19BoliviaData();
 });
 
 
