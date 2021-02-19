@@ -6,11 +6,11 @@ const app = express();
 
 const port = process.env.PORT || 4000
 
-schedule.scheduleJob('* * /18 * * *', async () => {
+schedule.scheduleJob('* * /20 * * *', async () => {
     await sendPushNotification();
 });
 
-// app.use(require('./route'));
+app.use(require('./route'));
 
 
 app.listen(port, () => {

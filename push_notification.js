@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { device_list } = require('./device list');
 
 require('dotenv').config();
 
@@ -12,21 +13,20 @@ const sendPushNotification = async () => {
 
     const res = await axios.default.post('https://fcm.googleapis.com/fcm/send', {
 
-        to: "dKarLxrOSuevHkQ-bG90wE:APA91bEdrKNt0DV6B3MZJnRZzUJwhAyVWJpSbPE8xBtH_gHlt-ZN46oVxkPeVmoBnwuR7oo0MLwXqHllCbHIYM6prqXGuU3vCE0jRyvSC9tj63Ylbchs6xTlEze7c67wHCFMRv29Eat1",
+        registration_ids: device_list,
+
         notification: {
             title: `Casos en ${Country}`,
-            body: `
-            Total: ${TotalConfirmed}
+            body: `Total: ${TotalConfirmed}
             Nuevos confirmados: ${NewConfirmed}
-            TotalRecovered recuperados: ${TotalRecovered}
+            Total recuperados: ${TotalRecovered}
             Total decesos: ${TotalDeaths}
             `,
             icon: "https://www.gstatic.com/devrel-devsite/prod/v4ff7513a940c844d7a200d0833ef676f25fef10662a3b57ca262bcf76cbd98e2/firebase/images/touchicon-180.png"
         },
         data: {
-            food: "food from postman"
+            food: "push from nodejs server"
         }
-
 
     }, {
         headers: {
@@ -48,8 +48,9 @@ const c19BoliviaData = async () => {
     return {
         pais: Country,
         total_confirmados: TotalConfirmed,
-        TotalDeaths,
-        TotalRecovered, NewConfirmed
+        muertes_totales: TotalDeaths,
+        total_recuperados: TotalRecovered,
+        nuevos_confirmados: NewConfirmed
     }
 
 }

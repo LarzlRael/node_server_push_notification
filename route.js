@@ -1,18 +1,31 @@
 const { Router } = require('express');
-const { consultData, c19BoliviaData } = require('./push_notification');
+const { sendPushNotification, c19BoliviaData } = require('./push_notification');
 
-    
+
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
 
+    
+    if (req.headers.firebase_key !== process.env.FIREBASE_KEY) {
+        return res.status(500).json({
+            error: 'the key was not provided'
+        })
+    }
 
-    await res.json(consultData())
+    await sendPushNotification();
+
+    return res.json({
+        ok: true,
+        message: 'Push notification message sent'
+    })
 
 });
 
-router.get('/c19Bolivia', async (req, res) => {
-    await console.log(c19BoliviaData());
+router.get('/', async (req, res) => {
+    const dataBolivia = await c19BoliviaData();
+
+    return res.json(dataBolivia);
 });
 
 
