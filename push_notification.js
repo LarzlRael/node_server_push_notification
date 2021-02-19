@@ -2,7 +2,7 @@ const axios = require('axios');
 
 require('dotenv').config();
 
-const consultData = async () => {
+const sendPushNotification = async () => {
 
     const { data } = await axios.default.get('https://api.covid19api.com/summary');
     const boliviaData = data.Countries[20];
@@ -14,9 +14,8 @@ const consultData = async () => {
 
         to: "dKarLxrOSuevHkQ-bG90wE:APA91bEdrKNt0DV6B3MZJnRZzUJwhAyVWJpSbPE8xBtH_gHlt-ZN46oVxkPeVmoBnwuR7oo0MLwXqHllCbHIYM6prqXGuU3vCE0jRyvSC9tj63Ylbchs6xTlEze7c67wHCFMRv29Eat1",
         notification: {
-            title: "Covid 19 en Bolivia",
+            title: `Casos en ${Country}`,
             body: `
-            Casos en ${Country} \n
             Total: ${TotalConfirmed}
             Nuevos confirmados: ${NewConfirmed}
             TotalRecovered recuperados: ${TotalRecovered}
@@ -34,7 +33,7 @@ const consultData = async () => {
             Authorization: `key=${process.env.FIREBASE_KEY}`
         }
     })
-    
+
     return res.data;
 }
 
@@ -56,6 +55,6 @@ const c19BoliviaData = async () => {
 }
 
 module.exports = {
-    consultData,
+    sendPushNotification,
     c19BoliviaData
 }
